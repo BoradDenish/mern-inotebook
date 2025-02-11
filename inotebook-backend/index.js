@@ -1,18 +1,24 @@
-const connectToMongo = require('./db');
-const express = require('express')
+import express from 'express';
+import connectToMongo from './db.js';
+
+// Import routes using ES module syntax
+import authRoutes from './routes/auth.js';
+import notesRoutes from './routes/notes.js';
 
 connectToMongo();
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
+
+app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+  res.send('Hello World!');
+});
 
-app.use('/api/auth', require('./routes/auth'))
-app.use('/api/notes', require('./routes/notes'))
+// Use imported routes
+app.use('/api/auth', authRoutes);
+app.use('/api/notes', notesRoutes);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-  console.log(`listening at http://localhost:${port}`)
-})
+  console.log(`Server running on http://localhost:${port}`);
+});
