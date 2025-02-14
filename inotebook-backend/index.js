@@ -3,7 +3,7 @@ import connectToMongo from './db.js';
 
 // Import routes using ES module syntax
 import authRoutes from './routes/auth.js';
-// import notesRoutes from './routes/notes.js';
+import notesRoutes from './routes/notes.js';
 
 connectToMongo();
 const app = express();
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 // Use imported routes
 app.use('/api/auth', authRoutes);
-// app.use('/api/notes', notesRoutes);
+app.use('/api/notes', notesRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

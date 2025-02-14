@@ -2,14 +2,17 @@ import mongoose, { model } from 'mongoose';
 const { Schema } = mongoose;
 
 const Noteschema = new Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    },
     title: {
         type: String,
         require: true
     },
     description: {
         type: String,
-        require: true,
-        unique: true
+        require: true
     },
     tag: {
         type: String,
@@ -20,5 +23,6 @@ const Noteschema = new Schema({
         default: Date.now 
     }
 });
+const Note = mongoose.model("notes", Noteschema);
 
-module.exports = mongoose.model("notes", Noteschema);
+export default Note;

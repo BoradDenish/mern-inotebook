@@ -1,9 +1,12 @@
-const express = require('express');
-const { model } = require('mongoose');
+import express from 'express';
+import Notes from '../models/Notes.js';
+import fetchuser from '../middleware/fetchuser.js'
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json([]);
+router.get('/fetchallnotes', fetchuser, async (req, res) => {
+    const notes = await Notes.find({ user: req.user});
+    res.send(notes);
 })
 
-module.exports = router;
+export default router;
