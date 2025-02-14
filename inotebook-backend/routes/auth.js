@@ -3,6 +3,7 @@ import User from '../models/Users.js';
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import fetchuser from '../middleware/fetchuser.js'
 
 const router = express.Router();
 const JWT_SECRET = "HelloThisSECRETTOKEN";
@@ -87,6 +88,21 @@ router.post('/login', [
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: 0, message: 'Internal Server Error' });
+    }
+});
+
+// Get logged in user details using: POST "/api/auth/getuser". require Auth
+router.post('/getuser', fetchuser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const user = await User.findById(userId).select("-password");
+        if (!user) {
+            return res.status(404).json({ success: 0, message: "User not found" });
+        }
+        res.status(200).json({ success: 1, message: "User data fetched successfully", data: user });
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        return res.status(500).json({ success: 0, message: "Internal Server Error" });
     }
 });
 
