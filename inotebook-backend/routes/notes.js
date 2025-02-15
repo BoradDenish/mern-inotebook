@@ -7,7 +7,7 @@ import { body, validationResult } from 'express-validator';
 const router = express.Router();
 
 router.get('/fetchallnotes', fetchuser, async (req, res) => {
-    const notes = await Notes.find({ user: req.user});
+    const notes = await Notes.find({ user: req.user.id });
     res.send(notes);
 })
 
@@ -21,10 +21,17 @@ router.post('/addnote', fetchuser, [
         return res.status(400).json({ success: 0, message: errors.array()[0].msg });
     }
 
-    const { email, password } = req.body;
+    const { title, description, tag  } = req.body;
 
     try {
-        console.log("try block");
+        const note = new Notes({
+            title,
+            description,
+            tag,
+            user: req.user.id
+        })
+        const saveNote = await note.save()
+        res.status(200).json({ success: 1, message: "Note save successfully", data: saveNote });
     } catch (error) {
         console.error(error);
         res.status(500).json({ success: 0, message: 'Internal Server Error' });
