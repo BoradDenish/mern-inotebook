@@ -6,12 +6,13 @@ import { body, validationResult } from 'express-validator';
 
 const router = express.Router();
 
+// Get All Notes Using: POST "/api/auth/fetchallnotes". Login Required
 router.get('/fetchallnotes', fetchuser, async (req, res) => {
     const notes = await Notes.find({ user: req.user.id });
     res.send(notes);
 })
 
-
+// Add New Note Using: POST "/api/auth/addnote". Login Required
 router.post('/addnote', fetchuser, [
     body('title', 'Enter a valid title').isLength({ min: 3 }),
     body('description', 'Description must be atleast 5 characters').isLength({ min: 5 })
@@ -38,5 +39,31 @@ router.post('/addnote', fetchuser, [
     }
 });
 
+// Update Exists Note Using: PUT "/api/auth/updatenote". Login Required
+router.put('/updatenote/:id', fetchuser, async (req, res) => {
+    const { title, description, tag  } = req.body;
 
+    try {
+        const newNote = {};
+        if(title) {newNote.title = title};
+        if(description) {newNote.description = description};
+        if(tag) {newNote.tag = tag};
+
+        let note = await Notes.findById(req.params.id);
+        if (!note){
+            res.status(404).json({ success: 0, message: "Not Found!"});
+        }
+
+        if (note.user.toString() !== req.user.id){
+            res.status(401).json({ success: 0, message: "Not Allowed!" });
+        }
+
+        const updateNote = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
+        res.status(200).json({ success: 1, message: "Note update successfully", data: updateNote });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: 0, message: 'Internal Server Error' });
+    }
+});
 export default router;
