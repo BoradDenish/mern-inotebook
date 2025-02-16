@@ -50,6 +50,34 @@ router.put('/updatenote/:id', fetchuser, async (req, res) => {
         if(tag) {newNote.tag = tag};
 
         let note = await Notes.findById(req.params.id);
+        if (!note) {
+            return res.status(404).json({ success: 0, message: "Not Found!" });
+        }
+
+        if (note.user.toString() !== req.user.id) {
+            return res.status(401).json({ success: 0, message: "Not Allowed!" });
+        }
+
+        const updateNote = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
+        res.status(200).json({ success: 1, message: "Note update successfully", data: updateNote });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: 0, message: 'Internal Server Error' });
+    }
+});
+
+// Delete Exists Note Using: DELETE "/api/auth/deletenote". Login Required
+router.delete('/deletenote/:id', fetchuser, async (req, res) => {
+    const { title, description, tag  } = req.body;
+
+    try {
+        const newNote = {};
+        if(title) {newNote.title = title};
+        if(description) {newNote.description = description};
+        if(tag) {newNote.tag = tag};
+
+        let note = await Notes.findById(req.params.id);
         if (!note){
             res.status(404).json({ success: 0, message: "Not Found!"});
         }
@@ -58,8 +86,8 @@ router.put('/updatenote/:id', fetchuser, async (req, res) => {
             res.status(401).json({ success: 0, message: "Not Allowed!" });
         }
 
-        const updateNote = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
-        res.status(200).json({ success: 1, message: "Note update successfully", data: updateNote });
+        const updateNote = await Notes.findByIdAndDelete(req.params.id);
+        res.status(200).json({ success: 1, message: "Note delete successfully", data: updateNote });
 
     } catch (error) {
         console.error(error);
