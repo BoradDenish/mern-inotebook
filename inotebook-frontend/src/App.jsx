@@ -1,12 +1,22 @@
 import { useState } from 'react'
 import './index.css';
+import Navbar from './assets/components/Navbar';
+import { BrowserRouter, Routes, Route } from "react-router";
+import Home from './assets/components/Home';
+import About from './assets/components/About';
 
 function App() {
 
   return (
-    <div className='flex justify-center py-4 text-[30px]'>
-      <h1 className='bg-blue-400'>This is Inotebook</h1>
-    </div>    
+    <>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
+    </>
   )
 }
 
