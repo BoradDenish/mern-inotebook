@@ -23,6 +23,9 @@ export default function Navbar() {
           <Link to="/about" className={`hover:text-yellow-300 transition ${location.pathname === "/about" ? "text-yellow-400" : ""}`}>
             About
           </Link>
+          <Link to="/note-list" className={`hover:text-yellow-300 transition ${location.pathname === "/note-list" ? "text-yellow-400" : ""}`}>
+            Note List
+          </Link>
         </div>
 
         <div className="flex items-center space-x-4">
