@@ -57,7 +57,7 @@ export default function Home() {
           </button>
         </form>
       </div>
-      {/* <Notes /> */}
+      {/* <Notes />  */}
     </div>
   );
 }

@@ -3,10 +3,11 @@ import { Pencil, Trash } from "lucide-react"; // Using Sun as Edit & Moon as Del
 import noteContext from "../context/notes/noteContext";
 
 export default function NoteItems({ note }) {
-  const { deleteNote } = useContext(noteContext);
+  const { deleteNote, editNote  } = useContext(noteContext);
 
   const handleEdit = () => {
     console.log("Editing note:", note._id);
+    editNote(note._id, note.title, note.description, note.tag);
   };
 
   const handleDelete = () => {
@@ -16,7 +17,7 @@ export default function NoteItems({ note }) {
   return (
     <div className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md">
       <h3 className="text-xl font-semibold text-gray-800 dark:text-white">{note.title}</h3>
-      <p className="text-gray-600 dark:text-gray-300">{note.description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus maiores reprehenderit molestiae quia dicta labore, cupiditate accusantium commodi quo temporibus, a nobis, explicabo vel ipsum? Tempore corporis atque est fugit asperiores! Quae.</p>
+      <p className="text-gray-600 dark:text-gray-300">{note.description}</p>
       {note.tag && (
         <span className="text-sm text-gray-500 dark:text-gray-400">#{note.tag}</span>
       )}
