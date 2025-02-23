@@ -16,9 +16,9 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Note Submitted: ", note);
     addNote({ title: note.title, description: note.description, tag: note.tag });
     // addNote(note.title, note.description, note.tag);
+    setNote({ title: "", description: "", tag: "" })
 
   };
 

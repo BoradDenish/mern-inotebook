@@ -10,7 +10,6 @@ export default function NoteState (props) {
 
     // Get All Notes
     const getNote = async () => {
-        console.log("Add new note")
 
         const response = await fetch(`${host}/notes/fetchallnotes`, {
             method: 'GEt',
@@ -20,14 +19,12 @@ export default function NoteState (props) {
             }
         })
         const json = await response.json();
-        console.log("JSON: " + json);
         setNotes(json)
     }
 
     // Add note
     // const addNote = (title, description, tag) => {
     const addNote = async (newNote) => {
-        console.log("Add new note", newNote.title);
 
         const response = await fetch(`${host}/notes/addnote`, {
             method: 'POST',
@@ -38,7 +35,6 @@ export default function NoteState (props) {
             body: JSON.stringify({title: newNote.title, description: newNote.description, tag: newNote.tag})
         })
         const json = await response.json();
-        console.log("JSON: " + json);
 
         setNotes(notes.concat(json))
     }
@@ -53,15 +49,12 @@ export default function NoteState (props) {
             }
         })
         const json = await response.json();
-        console.log("JSON: " + json);
-        console.log("Call delete function with id" + id);
         const newNotes = notes.filter((note) => {return note._id!==id});
         setNotes(newNotes);
     } 
 
     // Edit note
     const editNote = async (id, title, description, tag) => {
-        console.log("Edit console", id, title, description, tag);
         // API Call
         const response = await fetch(`${host}/notes/updatenote/${id}`, {
             method: 'PUT',
@@ -72,17 +65,19 @@ export default function NoteState (props) {
             body: JSON.stringify({title: title, description: description, tag: tag})
         })
         const json = await response.json();
-        console.log("JSON: " + json);
 
-        console.log("Call Edit Function With Thier Details!!");
-        for (let index = 0; index < notes.length; index++) {
-            const element = notes[index];
+        let newNotes = JSON.parse(JSON.stringify(notes));
+
+        for (let index = 0; index < newNotes.length; index++) {
+            const element = newNotes[index];
             if(element._id === id) {
-                element.title = title;
-                element.description = description;
-                element.tag = tag;
+                newNotes[index].title = title;
+                newNotes[index].description = description;
+                newNotes[index].tag = tag;
+                break;
             }
         }
+        setNotes(newNotes);
 
     }
 

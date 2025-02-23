@@ -8,6 +8,8 @@ import NoteState from './context/notes/noteState';
 import { ThemeProvider } from "./context/ThemeContext";
 import Notes from './components/Notes';
 import Alert from './components/Alert';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -25,9 +27,11 @@ function App() {
           <Navbar />
           {alert && <Alert message={alert.message} type={alert.type} onClose={() => setAlert(null)} />}
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/note-list" element={<Notes />} />
+            <Route path="/" element={<Notes />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
           </Routes>
         </BrowserRouter>
       </NoteState>

@@ -17,14 +17,22 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex space-x-6">
-          <Link to="/" className={`hover:text-yellow-300 transition ${location.pathname === "/" ? "text-yellow-400" : ""}`}>
+          <Link to="/home" className={`hover:text-yellow-300 transition ${location.pathname === "/home" ? "text-yellow-400" : ""}`}>
             Home
           </Link>
           <Link to="/about" className={`hover:text-yellow-300 transition ${location.pathname === "/about" ? "text-yellow-400" : ""}`}>
             About
           </Link>
-          <Link to="/note-list" className={`hover:text-yellow-300 transition ${location.pathname === "/note-list" ? "text-yellow-400" : ""}`}>
+          <Link to="/" className={`hover:text-yellow-300 transition ${location.pathname === "/" ? "text-yellow-400" : ""}`}>
             Note List
+          </Link>
+        </div>
+        <div className="gap-3 space-x-6">
+          <Link to="/login" className={`hover:text-yellow-300 transition ${location.pathname === "/login" ? "text-yellow-400" : ""}`}>
+            Login
+          </Link>
+          <Link to="/signup" className={`hover:text-yellow-300 transition ${location.pathname === "/signup" ? "text-yellow-400" : ""}`}>
+            Sign Up
           </Link>
         </div>
 
