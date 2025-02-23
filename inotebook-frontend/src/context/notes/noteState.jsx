@@ -61,14 +61,15 @@ export default function NoteState (props) {
 
     // Edit note
     const editNote = async (id, title, description, tag) => {
+        console.log("Edit console", id, title, description, tag);
         // API Call
         const response = await fetch(`${host}/notes/updatenote/${id}`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
                 'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhZTI5ZDIzOGY0OTlkY2UwNmZiZDYyIn0sImlhdCI6MTczOTU1MzM1MH0.EEd-i4sRfVzhh21GGWtezMQKFvTS0Vg2sQH7y0lRNbU"
             },
-            body: JSON.stringify(title, description, tag)
+            body: JSON.stringify({title: title, description: description, tag: tag})
         })
         const json = await response.json();
         console.log("JSON: " + json);

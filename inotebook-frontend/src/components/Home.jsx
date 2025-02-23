@@ -8,7 +8,7 @@ export default function Home() {
   const context = useContext(noteContext);
   const {addNote} = context;
 
-  const [note, setNote] = useState({ title: "", description: "", tag: "Default" });
+  const [note, setNote] = useState({ title: "", description: "", tag: "" });
 
   const handleChange = (e) => {
     setNote({ ...note, [e.target.name]: e.target.value });
@@ -23,7 +23,7 @@ export default function Home() {
   };
 
   return (
-    <div className={`p-6 min-h-screen flex items-center justify-center ${darkMode ? "bg-gray-600 text-white" : "bg-gray-50 text-gray-900"}`}>
+    <div className={`p-48 flex items-center justify-center ${darkMode ? "bg-gray-600 text-white" : "bg-gray-50 text-gray-900"}`}>
       <div className={`w-full max-w-lg p-8 rounded-xl shadow-xl ${darkMode ? "bg-gray-800" : "bg-white"}`}>
         <h2 className="text-3xl font-semibold text-center mb-6">Add a Note</h2>
         <form onSubmit={handleSubmit} className="space-y-5">

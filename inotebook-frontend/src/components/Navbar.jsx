@@ -8,7 +8,7 @@ export default function Navbar() {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
 
   return (
-    <nav className={`p-4 shadow-lg transition duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-600 text-black"}`}>
+    <nav className={`p-4 shadow-lg transition duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-600 text-white"}`}>
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-2xl font-bold flex items-center">
           <Link to="/">
