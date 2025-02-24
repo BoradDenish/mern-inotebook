@@ -25,7 +25,7 @@ export default function Login() {
         navigate("/");
     }
     else {
-
+      alert ("Invalid Credentials")
     }
 
   };
