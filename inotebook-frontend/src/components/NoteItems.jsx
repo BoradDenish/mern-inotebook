@@ -3,7 +3,7 @@ import { Pencil, Trash, X } from "lucide-react";
 import noteContext from "../context/notes/noteContext";
 import ThemeContext from "../context/ThemeContext";
 
-export default function NoteItems({ note }) {
+export default function NoteItems({ note, showAlert }) {
   const { deleteNote, editNote } = useContext(noteContext);
   const { darkMode } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,6 +33,7 @@ export default function NoteItems({ note }) {
 
   const handleDelete = () => {
     deleteNote(note._id);
+    showAlert("error");
   };
 
   return (

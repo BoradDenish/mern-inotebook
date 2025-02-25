@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import Notes from "./Notes";
+// import Notes from "./Notes";
 import ThemeContext from "../context/ThemeContext";
 import noteContext from "../context/notes/noteContext";
 
-export default function Home() {
+export default function Home({ showAlert }) {
   const { darkMode } = useContext(ThemeContext);
   const context = useContext(noteContext);
   const {addNote} = context;
@@ -18,6 +18,7 @@ export default function Home() {
     e.preventDefault();
     addNote({ title: note.title, description: note.description, tag: note.tag });
     // addNote(note.title, note.description, note.tag);
+    showAlert("success");
     setNote({ title: "", description: "", tag: "" })
 
   };
