@@ -14,10 +14,10 @@ import SignUp from './components/SignUp';
 function App() {
   const [alert, setAlert] = useState(null);
 
-  const showAlert = (type) => {
-    setAlert({ message: `This is a ${type} alert!`, type });
+  const showAlert = (message, type) => {
+    setAlert({ message, type });
     setTimeout(() => setAlert(null), 3000);
-  };
+  };  
 
   return (
     <>

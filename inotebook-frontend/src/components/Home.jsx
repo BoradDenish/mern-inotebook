@@ -6,6 +6,7 @@ import noteContext from "../context/notes/noteContext";
 export default function Home({ showAlert }) {
   const { darkMode } = useContext(ThemeContext);
   const context = useContext(noteContext);
+  
   const {addNote} = context;
 
   const [note, setNote] = useState({ title: "", description: "", tag: "" });
@@ -18,7 +19,7 @@ export default function Home({ showAlert }) {
     e.preventDefault();
     addNote({ title: note.title, description: note.description, tag: note.tag });
     // addNote(note.title, note.description, note.tag);
-    showAlert("success");
+    showAlert("Note added successfully.", "success");
     setNote({ title: "", description: "", tag: "" })
 
   };

@@ -15,7 +15,7 @@ export default function NoteState (props) {
             method: 'GEt',
             headers: {
                 'Content-type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhZTI5ZDIzOGY0OTlkY2UwNmZiZDYyIn0sImlhdCI6MTczOTU1MzM1MH0.EEd-i4sRfVzhh21GGWtezMQKFvTS0Vg2sQH7y0lRNbU"
+                'auth-token': localStorage.getItem('token')
             }
         })
         const json = await response.json();
@@ -30,7 +30,7 @@ export default function NoteState (props) {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhZTI5ZDIzOGY0OTlkY2UwNmZiZDYyIn0sImlhdCI6MTczOTU1MzM1MH0.EEd-i4sRfVzhh21GGWtezMQKFvTS0Vg2sQH7y0lRNbU"
+                'auth-token': localStorage.getItem('token')
             },
             body: JSON.stringify({title: newNote.title, description: newNote.description, tag: newNote.tag})
         })
@@ -45,7 +45,7 @@ export default function NoteState (props) {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhZTI5ZDIzOGY0OTlkY2UwNmZiZDYyIn0sImlhdCI6MTczOTU1MzM1MH0.EEd-i4sRfVzhh21GGWtezMQKFvTS0Vg2sQH7y0lRNbU"
+                'auth-token': localStorage.getItem('token')
             }
         })
         const json = await response.json();
@@ -60,7 +60,7 @@ export default function NoteState (props) {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjdhZTI5ZDIzOGY0OTlkY2UwNmZiZDYyIn0sImlhdCI6MTczOTU1MzM1MH0.EEd-i4sRfVzhh21GGWtezMQKFvTS0Vg2sQH7y0lRNbU"
+                'auth-token': localStorage.getItem('token')
             },
             body: JSON.stringify({title: title, description: description, tag: tag})
         })

@@ -2,13 +2,18 @@ import React, { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
 import NoteItems from './NoteItems';
 import { useEffect } from 'react';
-import ThemeContext from "../context/ThemeContext";
+import { useNavigate } from "react-router";
 
 export default function Notes({ showAlert }) {
-  const { darkMode } = useContext(ThemeContext);
   const { notes, getNote } = useContext(noteContext);
+  let navigate = useNavigate();
+
   useEffect(() => {
-    getNote()
+    if (localStorage.getItem('token')) {
+      getNote()
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   return (

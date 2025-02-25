@@ -25,15 +25,16 @@ export default function NoteItems({ note, showAlert }) {
   const handleChange = (e) => {
     setEditedNote({ ...editedNote, [e.target.name]: e.target.value });
   };
-
+  
   const handleSave = () => {
     editNote(editedNote.id, editedNote.title, editedNote.description, editedNote.tag);
     setIsModalOpen(false);
+    showAlert("Note update successfully", "success");
   };
 
   const handleDelete = () => {
     deleteNote(note._id);
-    showAlert("error");
+    showAlert("Note Deleted successfully.", "success");
   };
 
   return (
