@@ -8,9 +8,11 @@ export default function Notes({ showAlert }) {
   const { notes, getNote } = useContext(noteContext);
   let navigate = useNavigate();
 
+  // check user login or not
   useEffect(() => {
     if (localStorage.getItem('token')) {
-      getNote()
+      // Get note list
+      getNote();
     } else {
       navigate("/login");
     }

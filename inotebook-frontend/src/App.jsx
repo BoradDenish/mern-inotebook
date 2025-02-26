@@ -14,6 +14,7 @@ import SignUp from './components/SignUp';
 function App() {
   const [alert, setAlert] = useState(null);
 
+  // Call alert component
   const showAlert = (message, type) => {
     setAlert({ message, type });
     setTimeout(() => setAlert(null), 3000);

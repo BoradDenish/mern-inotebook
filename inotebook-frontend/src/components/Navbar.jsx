@@ -9,6 +9,7 @@ export default function Navbar() {
   const { darkMode, setDarkMode } = useContext(ThemeContext);
   let navigate = useNavigate();
 
+  // handle logout event
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
