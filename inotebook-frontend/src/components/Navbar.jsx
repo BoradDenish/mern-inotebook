@@ -34,7 +34,6 @@ export default function Navbar() {
           <Link to="/" className={`hover:text-yellow-300 transition ${location.pathname === "/" ? "text-yellow-400" : ""}`}>
             Note List
           </Link>
-          <button onClick={handleLogout} className="cursor-pointer hover:text-yellow-300 transition text-yellow-400">Logout</button>
         </div>
         ) : (
         <div className="gap-3 space-x-6 mr-[70px]">
@@ -48,6 +47,7 @@ export default function Navbar() {
       )}
 
       <div className="flex items-center space-x-4">
+      <button onClick={handleLogout} className="cursor-pointer hover:text-yellow-900 transition bg-amber-600 p-1.5 rounded">Logout</button>
         <button
           onClick={() => setDarkMode((prevMode) => !prevMode)}
           className="p-2 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-yellow-300 hover:bg-gray-400 dark:hover:bg-gray-600 transition"
